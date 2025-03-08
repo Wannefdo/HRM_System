@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HRM Login & Signup</title>
+  <link rel="stylesheet" href="adminmanager.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script> $(document).ready(function(){
+  $('.mobnav h3').click(function(){
+  $('.mobnav ul').toggle();
+  });
+  });
+  </script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      
+      background-size: cover;
+    }
+ .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .video-background video {
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+	 
+    }
+	.video-background::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust opacity (0.5) for desired darkness */
+  z-index: 0; /* Ensure it stays above the video but below content */
+}
+
+
+   
+    header {
+  background: #34495e;
+  color: #fff;
+  padding: 25px 40px; /* Increased default padding for larger width */
+  text-align: center;
+  font-size: 1.5em; /* Slightly larger font size by default */
+}
+
+
+   
+	.mobnav {display:none;}
+	
+	.mobnav ul li {width:100% ; display:block; padding:20px;}
+	.mobnav ul li a { width:100%;}
+
+    nav a:hover {
+      text-decoration: none;
+      color: #1abc9c;
+    }
+	
+	
+
+    .container {
+      flex: 1; /* Pushes footer to the bottom when content is short */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .card {
+      backdrop-filter:blur(30px);
+	  background:rgba(255,255,255,0.2);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;      
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      display: none; /* Initially hidden */
+    }
+
+    .card.active {
+      display: block; /* Display only active card */
+    }
+
+    input, select {
+      display: block;
+      width: 95%;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px;
+      background: #2c3e50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+	  margin-bottom: 10px;
+    }
+
+    button:hover {
+      background: #34495e;
+    }
+
+    .switch {
+      margin-top: 10px;
+      font-size: 0.9em;
+    }
+
+    .switch a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .switch a:hover {
+      color: #1abc9c;
+    }
+
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      width: 100%;
+      margin-top: auto; /* Ensures footer stays at the bottom */
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    footer a {
+      color: #1abc9c;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      footer {
+        padding: 10px;
+        font-size: 0.8em;
+      }
+
+      footer p {
+        margin-bottom: 5px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      footer {
+        font-size: 0.7em;
+        padding: 8px;
+      }
+    }
+	@media(max-width:370px){
+	header {
+    padding: 26px 70px; /* Even larger padding for smaller screens */
+    font-size: 1.8em; /* Prominent font size for compact devices */
+  }}
+	@media(max-width:350px){
+	header {
+    padding: 10px 50px; /* Even larger padding for smaller screens */
+    font-size: 1em; /* Prominent font size for compact devices */
+  }}
+  
+  
+  @media screen and (max-width:600px){
+	 
+	 .mobnav {display:block }
+	 nav ul{display:none;}
+	 .stats {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  
+  
+  @media (max-width: 768px) {
+  header {
+    padding: 35px 60px; /* Substantially increased padding for medium screens */
+    font-size: 1.8em; /* Larger font size for better emphasis */
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 40px 80px; /* Even larger padding for smaller screens */
+    font-size: 2em; /* Prominent font size for compact devices */
+  }
+}
+ @media (max-width: 450px) {
+
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+	@media (max-width: 350px) {
+   
+    header h1 {
+        font-size: 1.5rem;
+    }
+}
+
+  
+  </style>
+</head>
+<body>
+
+<div class="video-background">
+ 
+    <video autoplay muted loop>
+      <source src="emp.mp4" type="video/mp4">
+
+      Your browser does not support the video tag.
+    </video>
+
+ </div>
+  <header>
+    <h1>Welcome to HRM System</h1>
+  </header>
+  
+    <nav>   
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+	<div class="mobnav">
+	<h3>Menu</h3>
+	<ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+	</div>
+  </nav>
+  
+  
+  
+  <div class="container">
+    <div class="card active" id="login-card">
+      <h2 style="color:black">Login</h2><br>    <!-- #2c3e50 -->
+      <form action="login.php" method="POST">
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <select name="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="Admin">Admin</option>
+        <option value="Manager">Manager</option>
+        <option value="Employee">Employee</option>
+    </select>
+    <button type="submit">Login</button>
+</form>
+      <p class="switch">
+        Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a>
+      </p>
+    </div>
+    <div class="card" id="signup-card">
+      <h2 style="color:black">Sign Up</h2><br>
+      <form action="signup.php" method="POST">
+    <input type="text" name="full_name" placeholder="Full Name" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+    <select name="role" required>
+        <option value="" disabled selected>Select Role</option>
+        <option value="Admin">Admin</option>
+        <option value="Manager">Manager</option>
+        <option value="Employee">Employee</option>
+    </select>
+    <button type="submit">Sign Up</button>
+</form>
+      <p class="switch">
+        Already have an account? <a href="#" onclick="showLogin()">Login</a>
+      </p>
+    </div>
+  </div>
+  <footer>
+    <p>HRM System &copy; 2025</p>
+    <p>
+      <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a> | <a href="#">Support</a>
+    </p>
+  </footer>
+
+  <script>
+    function showSignup() {
+      document.getElementById('login-card').classList.remove('active');
+      document.getElementById('signup-card').classList.add('active');
+    }
+
+    function showLogin() {
+      document.getElementById('signup-card').classList.remove('active');
+      document.getElementById('login-card').classList.add('active');
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      const role = document.getElementById('login-role').value;
+      const info = document.getElementById('login-info');
+      info.textContent = `Login as ${role}`;
+    }
+
+    function handleSignup(event) {
+      event.preventDefault();
+      const role = document.getElementById('signup-role').value;
+      const info = document.getElementById('signup-info');
+      info.textContent = `Sign up as ${role}`;
+    }
+  </script>
+</body>
+</html>

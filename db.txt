@@ -1,0 +1,21 @@
+CREATE DATABASE hrm_system;
+
+USE hrm_system;
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(25) NOT NULL,
+    email VARCHAR(25) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('Admin', 'Manager', 'Employee') NOT NULL
+);
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,        -- Unique ID for each user
+    full_name VARCHAR(100) NOT NULL,          -- Full name of the user
+    email VARCHAR(100) NOT NULL UNIQUE,       -- Email address (must be unique)
+    password VARCHAR(255) NOT NULL,           -- Hashed password
+    role ENUM('Admin', 'Manager', 'Employee') NOT NULL, -- User role (restricted to specific roles)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,     -- Timestamp for record creation
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Timestamp for record update
+);
